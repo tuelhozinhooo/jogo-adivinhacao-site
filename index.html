@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo de Adivinhação</title>
+    <script>
+        async function iniciarJogo() {
+            const palpite = document.getElementById('palpite').value;
+            const response = await fetch('https://5c72ea87-a275-46f9-8d39-f1eee3bebfbc-00-69i8owfe3327.worf.replit.dev/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ input: palpite })
+            });
+            const data = await response.json();
+            document.getElementById('resultado').innerText = data.resultado;
+        }
+    </script>
+</head>
+<body>
+    <h1>Jogo de Adivinhação</h1>
+    <p>Insira seu palpite e clique em "Enviar":</p>
+    <input type="number" id="palpite">
+    <button onclick="iniciarJogo()">Enviar</button>
+    <pre id="resultado"></pre>
+</body>
+</html>
